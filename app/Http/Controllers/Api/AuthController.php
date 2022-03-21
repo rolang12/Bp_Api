@@ -47,6 +47,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+
         $created = User::create($credentials);
         
         $created = new ResourcesAuthController($created);

@@ -30,24 +30,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register'])
 ->name('register');
 
-Route::post('/login', [AuthController::class, 'login'])
+Route::post('login', [AuthController::class, 'login'])
 ->name('login');
 
 Route::get('dashboard', [HomeController::class, 'dashboard'])
 ->name('dashboard');
 
+Route::get('logout', [AuthController::class, 'logout'])
+->name('logout');
+
 
 Route::name('articles.')
-    ->middleware('auth:sanctum', 'verified')
+    ->middleware('api')
     ->group( function() {
 
         Route::get('show/{id}', [ArticlesController::class, 'show'])
         ->name('show');
-
                 
         Route::post('store-article', [ArticlesController::class, 'store'])
         ->name('store-article');
-
 
         Route::delete('delete/{id}', [ArticlesController::class, 'destroy'])
         ->name('delete');
@@ -60,6 +61,9 @@ Route::name('articles.')
 
         Route::patch('update-article', [ CrudArticlesController::class, 'updateArticle'])
         ->name('update-article');
+        
+        Route::get('show-all', [ CrudArticlesController::class, 'showAll'])
+        ->name('show-all');
         
     }
 );
