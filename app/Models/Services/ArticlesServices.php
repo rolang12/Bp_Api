@@ -15,7 +15,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator as ValidationValidator;
 
-class ArticlesServices {
+trait ArticlesServices {
 
     use HasFactory;
 
@@ -47,17 +47,17 @@ class ArticlesServices {
         return $articles;
     }
 
-    public static function assignToArticle($input, $requestMedia ) {
+    public static function bindDataToArticle($input) {
 
         $article['title'] = $input['title'];
         $article['content'] = $input['content'];
         $article['user_id'] = $input['user_id'];
-        $destination_path = 'public/images';
-        $image = $requestMedia->file('media');
-        $image_name = $image->getClientOriginalName();
-        $path = $requestMedia->file('media')->storeAs($destination_path, $image_name);
+        // $destination_path = 'public/images';
+        // $image = $requestMedia->file('media');
+        // $image_name = $image->getClientOriginalName();
+        // $path = $requestMedia->file('media')->storeAs($destination_path, $image_name);
         // $mediaData['articles_id'] = $article['id'];
-        $article['file'] = $image_name;
+        // $article['file'] = $image_name;
         // $media = Media::create($mediaData);
 
         $article    = Article::create($article);

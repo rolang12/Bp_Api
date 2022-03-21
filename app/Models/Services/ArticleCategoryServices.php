@@ -23,8 +23,8 @@ trait ArticleCategoryServices {
 
     public static function insertIds($categories, $article) {
 
-        $categories = array(strval($categories));
-        $article = array(strval($article));
+        $categories = array(strval($categories['id']));
+        $article = array(strval($article['id']));
 
         $artCat['categories_id'] = $categories[0];
         $artCat['articles_id'] = $article[0];

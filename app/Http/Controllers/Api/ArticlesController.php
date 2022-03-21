@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
-      // use ArticlesServices;
+      use ArticlesServices;
       use CommentsServices;
       use CategoriesServices;  
       use UsersServices;
@@ -35,8 +35,8 @@ class ArticlesController extends Controller
                   $categories = CategoriesServices::insertTags($request->categories);
   
               /* Call Articles' trait */
-                  // $article    = ArticlesServices::bindDataToArticle($data);
-                  $article = Articles::bindDataToArticle($data);
+                  $article    = ArticlesServices::bindDataToArticle($data);
+                //   $article = Articles::bindDataToArticle($data);
                    
               /* Call ArticleCategoryServices' trait */
                   $artCat     = ArticleCategoryServices::insertIds($categories, $article);

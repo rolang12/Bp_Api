@@ -37,17 +37,17 @@ Route::get('dashboard', [HomeController::class, 'dashboard'])
 ->name('dashboard');
 
 
-
-
 Route::name('articles.')
     ->middleware('auth:sanctum', 'verified')
     ->group( function() {
 
-        Route::post('store-article', [ArticlesController::class, 'storeArticle'])
-        ->name('store-article');
-
         Route::get('show/{id}', [ArticlesController::class, 'show'])
         ->name('show');
+
+                
+        Route::post('store-article', [ArticlesController::class, 'store'])
+        ->name('store-article');
+
 
         Route::delete('delete/{id}', [ArticlesController::class, 'destroy'])
         ->name('delete');

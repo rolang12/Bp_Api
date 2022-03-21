@@ -19,7 +19,7 @@ trait CategoriesServices {
 
     public static function insertTags($categories) {
 
-        $categories = implode(", ", $categories);
+        $categories = implode(", ", [$categories]);
         
         $category['tags'] = $categories;
         
