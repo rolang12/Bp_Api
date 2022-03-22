@@ -24,7 +24,9 @@ class UpdateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|min:5',
+            'content' => 'required|min:20',
+            'user_id' => 'required',
         ];
     }
 }

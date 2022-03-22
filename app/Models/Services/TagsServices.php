@@ -2,6 +2,7 @@
 
 namespace App\Models\Services;
 
+use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,9 +15,14 @@ trait TagsServices {
 
     public static function getArticleByTagId($id) {
 
-        $artTags = ArticleCategory::with('article')
-        ->where('categories_id', $id)
-        ->simplePaginate(12);
+        
+        // $artTags = ArticleCategory::with('article')
+        // ->where('categories_id', $id)
+        // ->get();
+
+        $artTags = Article::with('category')
+        ->where('category.tags', $id)
+        ->get();
 
         if ($artTags == null) {
             return $artTags = [];
@@ -29,8 +35,8 @@ trait TagsServices {
     public static function getArticleByTag($tag) {
 
         $artTags = Category::with('articleCategory','article')
-        ->where('categories.tags','like', $tag.'%')
-        ->simplePaginate(12);
+        ->where('tags','like', '%'.$tag.'%')
+        ->get();
 
         if ($artTags == null) {
             return $artTags = [];
@@ -45,7 +51,7 @@ trait TagsServices {
         $artTags = Category::where('id', $tag)
         ->get('tags');
 
-        if ($artTags == null) {
+        if ($artTags === null) {
             return $artTags = [];
         }
 

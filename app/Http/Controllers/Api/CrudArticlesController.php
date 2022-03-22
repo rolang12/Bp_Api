@@ -22,6 +22,7 @@ class CrudArticlesController extends Controller
     public function updateArticle(UpdateArticleRequest $articleRequest){
 
         $article = ArticlesServices::updateArticle($articleRequest);
+        
         if ($article = $articleRequest->validated() ){
             return response()->json(['message' => "Article updated successfully"], 200);
         }

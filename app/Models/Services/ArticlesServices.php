@@ -15,7 +15,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator as ValidationValidator;
 
-trait ArticlesServices {
+class ArticlesServices {
 
     use HasFactory;
 
@@ -78,7 +78,6 @@ trait ArticlesServices {
         $user = Article::find($data->id);
         $user->title         = $data->title;
         $user->content        = $data->content;
-        $user->rol          = $data->rol;
         return $user->save();
 
     }

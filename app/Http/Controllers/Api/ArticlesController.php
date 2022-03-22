@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
-      use ArticlesServices;
+    //   use ArticlesServices;
       use CommentsServices;
       use CategoriesServices;  
       use UsersServices;
@@ -30,20 +30,19 @@ class ArticlesController extends Controller
          
           if ($data = $request->validated()) {
               
-              DB::beginTransaction();
               /* Call Categories' trait */
                   $categories = CategoriesServices::insertTags($request->categories);
   
               /* Call Articles' trait */
-                  $article    = ArticlesServices::bindDataToArticle($data);
-                //   $article = Articles::bindDataToArticle($data);
+                //   $article    = ArticlesServices::bindDataToArticle($data);
+                  $article = Articles::bindDataToArticle($data);
                    
               /* Call ArticleCategoryServices' trait */
                   $artCat     = ArticleCategoryServices::insertIds($categories, $article);
                
                   return response()->json(['message' => "Article Created succesfully", 'Article: ' => $article ], 201);
           }      
-          DB::commit();
+        //   DB::commit();
           return response()->json(['message' => 'Error to create article' ], 500);
   
   

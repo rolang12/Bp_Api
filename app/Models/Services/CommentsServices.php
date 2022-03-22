@@ -36,12 +36,10 @@ trait CommentsServices {
     }
     public static function insertComment($data) {
 
-        $comment = $data->validated(); 
-        
         $comment['articles_id'] = $data['articles_id'];
         $comment['content'] = $data['content'];
-        $comment['user_id'] = auth()->user()->id;
-        $comment['articles_id'] = intval($data['articles_id'], 10);
+        $comment['user_id'] = $data['user_id'];
+        // $comment['articles_id'] = intval($data['articles_id'], 10);
         
         $comment = Comment::create($comment);
 

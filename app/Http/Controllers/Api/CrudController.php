@@ -42,7 +42,21 @@ class CrudController extends Controller
         if ($user){
             return response()->json(['message' => "user updated successfully"], 200);
         }
+        return response()->json(['message' => "Error to update user "], 400);
+    
+    }
+
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id)->delete();
+
+        if ($user){
+            return response()->json(['message' => "use deleted successfully"], 200);
+        }
         return response()->json(['message' => "Error to delete user "], 400);
     
     }
+
+    
 }
